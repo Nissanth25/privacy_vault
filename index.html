@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Privacy Vault</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Secure Privacy Vault</h1>
+        
+        <!-- Setup Screen -->
+        <div id="setupScreen" class="screen">
+            <h2>First-Time Setup</h2>
+            <p>Select 3 security questions and provide answers</p>
+            <div class="import-section">
+                <p><strong>Have an existing vault?</strong></p>
+                <input type="file" id="importFile" accept=".vault,.json" style="display:none">
+                <button type="button" onclick="document.getElementById('importFile').click()">Import Vault File</button>
+                <p class="hint">Import from another device to access your data here</p>
+            </div>
+            <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
+            <form id="setupForm">
+                <div class="question-group">
+                    <select id="q1" required>
+                        <option value="">Select Question 1</option>
+                        <option value="pet">What was your first pet's name?</option>
+                        <option value="city">In what city were you born?</option>
+                        <option value="school">What is your elementary school name?</option>
+                        <option value="teacher">What was your favorite teacher's name?</option>
+                    </select>
+                    <input type="text" id="a1" placeholder="Answer 1" required>
+                </div>
+                <div class="question-group">
+                    <select id="q2" required>
+                        <option value="">Select Question 2</option>
+                        <option value="mother">What is your mother's maiden name?</option>
+                        <option value="book">What is your favorite book?</option>
+                        <option value="food">What is your favorite food?</option>
+                        <option value="color">What is your favorite color?</option>
+                    </select>
+                    <input type="text" id="a2" placeholder="Answer 2" required>
+                </div>
+                <div class="question-group">
+                    <select id="q3" required>
+                        <option value="">Select Question 3</option>
+                        <option value="car">What was your first car model?</option>
+                        <option value="street">What street did you grow up on?</option>
+                        <option value="friend">What is your best friend's name?</option>
+                        <option value="movie">What is your favorite movie?</option>
+                    </select>
+                    <input type="text" id="a3" placeholder="Answer 3" required>
+                </div>
+                <input type="password" id="setupPassword" placeholder="Create Password" required minlength="6">
+                <button type="submit">Complete Setup</button>
+            </form>
+        </div>
+
+        <!-- Verification Screen -->
+        <div id="verifyScreen" class="screen hidden">
+            <h2>Access Vault</h2>
+            <form id="verifyForm">
+                <div id="verifyQuestions"></div>
+                <button type="submit">Verify Answers</button>
+            </form>
+        </div>
+
+        <!-- Password Screen -->
+        <div id="passwordScreen" class="screen hidden">
+            <h2>Enter Password</h2>
+            <form id="passwordForm">
+                <input type="password" id="vaultPassword" placeholder="Enter Password" required>
+                <button type="submit">Unlock Vault</button>
+            </form>
+            <p class="error" id="passwordError"></p>
+        </div>
+
+        <!-- Vault Screen -->
+        <div id="vaultScreen" class="screen hidden">
+            <h2>Your Private Vault</h2>
+            <div class="vault-id-box">
+                <span>🆔 Vault ID:</span>
+                <code id="vaultIdDisplay">-</code>
+                <button onclick="vault.copyVaultId()" class="copy-btn">📋 Copy</button>
+            </div>
+            <div class="vault-actions">
+                <button onclick="vault.exportVault()" class="export-btn">📦 Export Vault</button>
+                <button onclick="vault.logout()">🔐 Logout</button>
+            </div>
+            <p class="hint">Use your Vault ID to identify your vault on any device</p>
+            
+            <div class="vault-section">
+                <h3>Add Private Note</h3>
+                <textarea id="noteInput" placeholder="Enter private note"></textarea>
+                <button onclick="vault.addNote()">Save Note</button>
+            </div>
+
+            <div class="vault-section">
+                <h3>Upload Private File</h3>
+                <input type="file" id="fileInput">
+                <button onclick="vault.addFile()">Upload File</button>
+            </div>
+
+            <div class="vault-section">
+                <h3>Your Private Data</h3>
+                <div id="notesContainer"></div>
+                <div id="filesContainer"></div>
+            </div>
+        </div>
+
+        <p class="error" id="errorMsg"></p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
