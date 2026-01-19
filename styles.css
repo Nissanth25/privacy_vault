@@ -26,7 +26,24 @@ body {
 h1 {
     text-align: center;
     color: #333;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    text-align: center;
+    color: #667eea;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 25px;
+    padding: 8px;
+    background: #f0f3ff;
+    border-radius: 20px;
+}
+
+.welcome-text {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
 }
 
 h2 {
@@ -224,4 +241,43 @@ label {
 
 .copy-btn:hover {
     background: rgba(255,255,255,0.3);
+}
+
+.switch-user {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.switch-user a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.switch-user a:hover {
+    text-decoration: underline;
+}
+
+.security-info {
+    background: #e8f5e9;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-left: 4px solid #27ae60;
+}
+
+.security-info h4 {
+    color: #27ae60;
+    margin: 0 0 10px 0;
+}
+
+.security-info ul {
+    margin: 0;
+    padding-left: 20px;
+    color: #555;
+}
+
+.security-info li {
+    margin: 5px 0;
 }

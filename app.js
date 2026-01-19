@@ -343,6 +343,13 @@ const vault = {
         this.showVerifyScreen();
     },
 
+    switchUser() {
+        if (confirm('⚠️ This will clear the current vault from this browser and let you create a new one or import a different vault.\n\nThe current vault data will be DELETED from this browser.\n\nContinue?')) {
+            storage.clear();
+            this.showSetupScreen();
+        }
+    },
+
     copyVaultId() {
         navigator.clipboard.writeText(this.vaultId).then(() => {
             alert('✅ Vault ID copied to clipboard!');

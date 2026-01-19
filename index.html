@@ -9,18 +9,20 @@
 <body>
     <div class="container">
         <h1>🔐 Secure Privacy Vault</h1>
+        <p class="tagline">No Account • No Login • No Email • 100% Private</p>
         
         <!-- Setup Screen -->
         <div id="setupScreen" class="screen">
-            <h2>First-Time Setup</h2>
-            <p>Select 3 security questions and provide answers</p>
+            <h2>Create Your Private Vault</h2>
+            <p class="welcome-text">Anyone can use this website to store private data securely. Your data is protected by questions only YOU know the answers to.</p>
             <div class="import-section">
-                <p><strong>Have an existing vault?</strong></p>
+                <p><strong>Already have a vault?</strong></p>
                 <input type="file" id="importFile" accept=".vault,.json" style="display:none">
                 <button type="button" onclick="document.getElementById('importFile').click()">Import Vault File</button>
                 <p class="hint">Import from another device to access your data here</p>
             </div>
             <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
+            <h3>🆕 New User? Create Your Vault</h3>
             <form id="setupForm">
                 <div class="question-group">
                     <select id="q1" required>
@@ -59,11 +61,15 @@
 
         <!-- Verification Screen -->
         <div id="verifyScreen" class="screen hidden">
-            <h2>Access Vault</h2>
+            <h2>🔓 Unlock Your Vault</h2>
+            <p class="welcome-text">Answer your security questions to access your private data</p>
             <form id="verifyForm">
                 <div id="verifyQuestions"></div>
-                <button type="submit">Verify Answers</button>
+                <button type="submit">Verify & Continue</button>
             </form>
+            <div class="switch-user">
+                <p>Not your vault? <a href="#" onclick="vault.switchUser()">Create New Vault</a></p>
+            </div>
         </div>
 
         <!-- Password Screen -->
@@ -106,6 +112,15 @@
                 <h3>Your Private Data</h3>
                 <div id="notesContainer"></div>
                 <div id="filesContainer"></div>
+            </div>
+            
+            <div class="security-info">
+                <h4>🛡️ Your Data is Protected</h4>
+                <ul>
+                    <li>✅ AES-256 Encryption</li>
+                    <li>✅ No server storage - data stays on YOUR device</li>
+                    <li>✅ Only correct answers + password can decrypt</li>
+                </ul>
             </div>
         </div>
 
