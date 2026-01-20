@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Animated Stars Background -->
+    <div class="stars" id="stars"></div>
+    
     <div class="container">
         <h1>🔐 Secure Privacy Vault</h1>
         <p class="tagline">No Account • No Login • No Email • 100% Private</p>
@@ -128,5 +131,18 @@
     </div>
 
     <script src="app.js"></script>
+    <script>
+        // Create animated stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            star.style.animationDuration = (Math.random() * 2 + 1) + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
 </body>
 </html>
