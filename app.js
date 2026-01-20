@@ -97,10 +97,26 @@ const vault = {
     },
 
     async init() {
+        // Always show welcome screen first
+        this.showWelcomeScreen();
+    },
+
+    showWelcomeScreen() {
+        this.hideAllScreens();
+        document.getElementById('welcomeScreen').classList.remove('hidden');
+    },
+
+    showLoginOptions() {
+        this.hideAllScreens();
+        document.getElementById('loginOptionsScreen').classList.remove('hidden');
+    },
+
+    checkExistingVault() {
         if (storage.exists('vaultConfig')) {
             this.showVerifyScreen();
         } else {
-            this.showSetupScreen();
+            alert('❌ No vault found on this device!\\n\\nPlease create a new vault or import a vault file.');
+            this.showLoginOptions();
         }
     },
 
@@ -423,8 +439,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('verifyForm').addEventListener('submit', (e) => vault.handleVerify(e));
     document.getElementById('passwordForm').addEventListener('submit', (e) => vault.handlePassword(e));
     
-    // Import file handler
+    // Import file handler (setup screen)
     document.getElementById('importFile').addEventListener('change', (e) => {
+        if (e.target.files[0]) {
+            vault.importVault(e.target.files[0]);
+        }
+    });
+    
+    // Import file handler (login screen)
+    document.getElementById('importFileLogin').addEventListener('change', (e) => {
         if (e.target.files[0]) {
             vault.importVault(e.target.files[0]);
         }

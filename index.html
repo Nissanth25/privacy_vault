@@ -12,20 +12,77 @@
     
     <div class="container">
         <h1>🔐 Secure Privacy Vault</h1>
-        <p class="tagline">No Account • No Login • No Email • 100% Private</p>
+        <p class="tagline">No Email • No OTP • Question-Based Security • 100% Private</p>
+        
+        <!-- Welcome/Landing Screen -->
+        <div id="welcomeScreen" class="screen">
+            <div class="welcome-hero">
+                <div class="hero-icon">🛡️</div>
+                <h2>Welcome to Privacy Vault</h2>
+                <p class="welcome-text">Store your private notes and files securely. Protected by security questions only YOU know.</p>
+            </div>
+            
+            <div class="auth-options">
+                <div class="auth-card" onclick="vault.showLoginOptions()">
+                    <div class="auth-icon">🔑</div>
+                    <h3>Login</h3>
+                    <p>Access your existing vault</p>
+                </div>
+                
+                <div class="auth-card" onclick="vault.showSetupScreen()">
+                    <div class="auth-icon">✨</div>
+                    <h3>Sign Up</h3>
+                    <p>Create a new private vault</p>
+                </div>
+            </div>
+            
+            <div class="features-list">
+                <div class="feature">🔒 AES-256 Encryption</div>
+                <div class="feature">🚫 No Email Required</div>
+                <div class="feature">💾 Works Offline</div>
+                <div class="feature">🌐 Access Anywhere</div>
+            </div>
+        </div>
+        
+        <!-- Login Options Screen -->
+        <div id="loginOptionsScreen" class="screen hidden">
+            <h2>🔑 Login to Your Vault</h2>
+            <p class="welcome-text">Choose how to access your vault</p>
+            
+            <div class="login-methods">
+                <button class="method-btn" onclick="vault.checkExistingVault()">
+                    <span class="method-icon">🏠</span>
+                    <span class="method-text">
+                        <strong>Continue with This Device</strong>
+                        <small>Access vault saved on this browser</small>
+                    </span>
+                </button>
+                
+                <button class="method-btn" onclick="document.getElementById('importFileLogin').click()">
+                    <span class="method-icon">📁</span>
+                    <span class="method-text">
+                        <strong>Import Vault File</strong>
+                        <small>Load vault from another device</small>
+                    </span>
+                </button>
+                <input type="file" id="importFileLogin" accept=".vault,.json" style="display:none">
+            </div>
+            
+            <button class="back-btn" onclick="vault.showWelcomeScreen()">← Back to Home</button>
+        </div>
         
         <!-- Setup Screen -->
-        <div id="setupScreen" class="screen">
-            <h2>Create Your Private Vault</h2>
-            <p class="welcome-text">Anyone can use this website to store private data securely. Your data is protected by questions only YOU know the answers to.</p>
+        <div id="setupScreen" class="screen hidden">
+            <h2>✨ Create Your Private Vault</h2>
+            <p class="welcome-text">Set up 3 security questions. Only correct answers can unlock your vault.</p>
             <div class="import-section">
-                <p><strong>Already have a vault?</strong></p>
+                <p><strong>Already have a vault file?</strong></p>
                 <input type="file" id="importFile" accept=".vault,.json" style="display:none">
                 <button type="button" onclick="document.getElementById('importFile').click()">Import Vault File</button>
                 <p class="hint">Import from another device to access your data here</p>
             </div>
-            <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
-            <h3>🆕 New User? Create Your Vault</h3>
+            <hr>
+            <h3>🆕 Create New Vault</h3>
             <form id="setupForm">
                 <div class="question-group">
                     <select id="q1" required>
@@ -58,8 +115,9 @@
                     <input type="text" id="a3" placeholder="Answer 3" required>
                 </div>
                 <input type="password" id="setupPassword" placeholder="Create Password" required minlength="6">
-                <button type="submit">Complete Setup</button>
+                <button type="submit">🚀 Create My Vault</button>
             </form>
+            <button class="back-btn" onclick="vault.showWelcomeScreen()">← Back to Home</button>
         </div>
 
         <!-- Verification Screen -->
@@ -73,6 +131,7 @@
             <div class="switch-user">
                 <p>Not your vault? <a href="#" onclick="vault.switchUser()">Create New Vault</a></p>
             </div>
+            <button class="back-btn" onclick="vault.showWelcomeScreen()">← Back to Home</button>
         </div>
 
         <!-- Password Screen -->
