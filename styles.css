@@ -1,283 +1,559 @@
+/* ===== RESET & BASE ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* ===== ANIMATED BACKGROUND ===== */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    position: relative;
+    overflow-x: hidden;
 }
 
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== FLOATING PARTICLES ===== */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 200, 255, 0.2) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ===== GLASSMORPHISM CONTAINER ===== */
 .container {
-    background: white;
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
     padding: 40px;
     max-width: 600px;
     width: 100%;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 0 80px rgba(255, 255, 255, 0.05);
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* ===== GLOWING BORDER ANIMATION ===== */
+.container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5, #ff006e);
+    background-size: 300% 300%;
+    border-radius: 26px;
+    z-index: -1;
+    animation: glowingBorder 4s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes glowingBorder {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== HEADINGS ===== */
 h1 {
     text-align: center;
-    color: #333;
+    color: #fff;
     margin-bottom: 10px;
+    font-size: 2.2rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    letter-spacing: 1px;
 }
 
 .tagline {
     text-align: center;
-    color: #667eea;
+    background: linear-gradient(90deg, #ff006e, #8338ec, #3a86ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 13px;
     margin-bottom: 25px;
-    padding: 8px;
-    background: #f0f3ff;
-    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    backdrop-filter: blur(5px);
 }
 
 .welcome-text {
-    color: #666;
+    color: rgba(255, 255, 255, 0.8);
     margin-bottom: 20px;
-    line-height: 1.5;
+    line-height: 1.6;
+    text-align: center;
 }
 
 h2 {
-    color: #555;
+    color: #fff;
     margin-bottom: 20px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-h3, h4 {
-    color: #666;
-    margin: 20px 0 10px;
+h3 {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 20px 0 15px;
+    font-size: 1.1rem;
 }
 
+h4 {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 15px 0 10px;
+}
+
+/* ===== SCREEN ANIMATIONS ===== */
 .screen {
-    animation: fadeIn 0.3s;
+    animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hidden {
     display: none;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes slideIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(30px) scale(0.95); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
 }
 
+/* ===== FORM ELEMENTS ===== */
 .question-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 select, input[type="text"], input[type="password"], textarea {
     width: 100%;
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 6px;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
     font-size: 14px;
-    margin-top: 5px;
-    transition: border-color 0.3s;
+    margin-top: 8px;
+    color: #fff;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+select option {
+    background: #1a1a2e;
+    color: #fff;
+}
+
+input::placeholder, textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 select:focus, input:focus, textarea:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #8338ec;
+    box-shadow: 0 0 20px rgba(131, 56, 236, 0.4);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 textarea {
-    min-height: 100px;
+    min-height: 120px;
     resize: vertical;
 }
 
+/* ===== BUTTONS ===== */
 button {
-    background: #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
+    padding: 14px 28px;
+    border-radius: 12px;
     font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
     margin-top: 10px;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
 }
 
 button:hover {
-    background: #5568d3;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:active {
+    transform: translateY(-1px);
 }
 
 form button[type="submit"] {
     width: 100%;
-    padding: 14px;
+    padding: 16px;
     font-size: 16px;
-    font-weight: bold;
+    margin-top: 20px;
+    background: linear-gradient(135deg, #00c6fb 0%, #005bea 100%);
 }
 
+form button[type="submit"]:hover {
+    box-shadow: 0 10px 30px rgba(0, 198, 251, 0.5);
+}
+
+/* ===== ERROR MESSAGE ===== */
 .error {
-    color: #e74c3c;
+    color: #ff6b6b;
     text-align: center;
     margin-top: 15px;
     font-size: 14px;
+    padding: 10px;
+    background: rgba(255, 107, 107, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 107, 107, 0.3);
 }
 
+/* ===== VAULT ACTIONS ===== */
 .vault-actions {
-    text-align: right;
-    margin-bottom: 20px;
-}
-
-.vault-section {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-.vault-item {
-    background: white;
-    padding: 15px;
-    border-radius: 6px;
-    margin: 10px 0;
-    border-left: 4px solid #667eea;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.vault-item p {
-    flex: 1;
-    word-break: break-word;
-    margin-right: 10px;
-}
-
-.vault-item button {
-    margin: 0 5px;
-    padding: 8px 16px;
-    font-size: 12px;
-}
-
-input[type="file"] {
-    border: none;
-    padding: 10px 0;
-}
-
-label {
-    display: block;
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-.import-section {
-    background: #e8f4f8;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    border: 2px dashed #667eea;
-}
-
-.import-section button {
-    background: #27ae60;
-}
-
-.import-section button:hover {
-    background: #219a52;
-}
-
-.hint {
-    font-size: 12px;
-    color: #888;
-    margin-top: 8px;
-    text-align: center;
-}
-
-.export-btn {
-    background: #27ae60;
-}
-
-.export-btn:hover {
-    background: #219a52;
-}
-
-.vault-actions {
-    text-align: right;
-    margin-bottom: 10px;
-}
-
-.vault-actions button {
-    margin-left: 10px;
-}
-
-.vault-id-box {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 15px 20px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
+    justify-content: flex-end;
     gap: 10px;
     margin-bottom: 15px;
     flex-wrap: wrap;
 }
 
+/* ===== VAULT SECTIONS ===== */
+.vault-section {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 25px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.vault-section:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== VAULT ITEMS ===== */
+.vault-item {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    padding: 18px;
+    border-radius: 12px;
+    margin: 12px 0;
+    border-left: 4px solid;
+    border-image: linear-gradient(180deg, #00c6fb, #005bea) 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.vault-item:hover {
+    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.vault-item p {
+    flex: 1;
+    word-break: break-word;
+    margin-right: 15px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.vault-item button {
+    margin: 0 5px;
+    padding: 10px 18px;
+    font-size: 11px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.vault-item button:first-of-type {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* ===== FILE INPUT ===== */
+input[type="file"] {
+    border: none;
+    padding: 12px 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: all 0.3s ease;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    transform: scale(1.05);
+}
+
+/* ===== LABELS ===== */
+label {
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+/* ===== IMPORT SECTION ===== */
+.import-section {
+    background: linear-gradient(135deg, rgba(6, 255, 165, 0.1) 0%, rgba(0, 91, 234, 0.1) 100%);
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    border: 2px dashed rgba(6, 255, 165, 0.4);
+    transition: all 0.3s ease;
+}
+
+.import-section:hover {
+    border-color: rgba(6, 255, 165, 0.8);
+    background: linear-gradient(135deg, rgba(6, 255, 165, 0.15) 0%, rgba(0, 91, 234, 0.15) 100%);
+}
+
+.import-section p strong {
+    color: #06ffa5;
+}
+
+.import-section button {
+    background: linear-gradient(135deg, #06ffa5 0%, #00d9f5 100%);
+    color: #0a0a0a;
+}
+
+.import-section button:hover {
+    box-shadow: 0 10px 30px rgba(6, 255, 165, 0.4);
+}
+
+.hint {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* ===== EXPORT BUTTON ===== */
+.export-btn {
+    background: linear-gradient(135deg, #06ffa5 0%, #00d9f5 100%) !important;
+    color: #0a0a0a !important;
+}
+
+.export-btn:hover {
+    box-shadow: 0 10px 30px rgba(6, 255, 165, 0.4) !important;
+}
+
+/* ===== VAULT ID BOX ===== */
+.vault-id-box {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+    color: white;
+    padding: 18px 25px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 .vault-id-box code {
-    background: rgba(255,255,255,0.2);
-    padding: 8px 15px;
-    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 18px;
+    border-radius: 8px;
     font-size: 18px;
     font-weight: bold;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     font-family: 'Courier New', monospace;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .copy-btn {
-    background: rgba(255,255,255,0.2);
-    padding: 8px 12px;
-    font-size: 12px;
-    margin: 0;
+    background: rgba(255, 255, 255, 0.2) !important;
+    padding: 10px 15px !important;
+    font-size: 12px !important;
+    margin: 0 !important;
+    backdrop-filter: blur(5px);
 }
 
 .copy-btn:hover {
-    background: rgba(255,255,255,0.3);
+    background: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: none !important;
 }
 
+/* ===== SWITCH USER ===== */
 .switch-user {
     text-align: center;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.switch-user p {
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .switch-user a {
-    color: #667eea;
+    color: #00c6fb;
     text-decoration: none;
     font-weight: bold;
+    transition: all 0.3s ease;
 }
 
 .switch-user a:hover {
-    text-decoration: underline;
+    color: #06ffa5;
+    text-shadow: 0 0 10px rgba(6, 255, 165, 0.5);
 }
 
+/* ===== SECURITY INFO ===== */
 .security-info {
-    background: #e8f5e9;
-    padding: 15px 20px;
-    border-radius: 8px;
-    border-left: 4px solid #27ae60;
+    background: linear-gradient(135deg, rgba(6, 255, 165, 0.1) 0%, rgba(0, 200, 83, 0.1) 100%);
+    padding: 20px 25px;
+    border-radius: 16px;
+    border-left: 4px solid #06ffa5;
+    margin-top: 20px;
 }
 
 .security-info h4 {
-    color: #27ae60;
-    margin: 0 0 10px 0;
+    color: #06ffa5;
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .security-info ul {
     margin: 0;
-    padding-left: 20px;
-    color: #555;
+    padding-left: 0;
+    list-style: none;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .security-info li {
-    margin: 5px 0;
+    margin: 8px 0;
+    padding-left: 5px;
+}
+
+/* ===== DIVIDER ===== */
+hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 25px 0;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #764ba2, #667eea);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .container {
+        padding: 25px 20px;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .vault-id-box {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .vault-actions {
+        justify-content: center;
+    }
+    
+    .vault-item {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .vault-item p {
+        margin-right: 0;
+        text-align: center;
+    }
+}
+
+/* ===== SELECTION COLOR ===== */
+::selection {
+    background: #8338ec;
+    color: #fff;
 }
