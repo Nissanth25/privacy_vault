@@ -115,8 +115,8 @@ const vault = {
         if (storage.exists('vaultConfig')) {
             this.showVerifyScreen();
         } else {
-            alert('❌ No vault found on this device! Please create a new vault or import a vault file.');
-            this.showLoginOptions();
+            // No vault found - redirect to setup screen directly
+            this.showSetupScreen();
         }
     },
 
