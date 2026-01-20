@@ -23,7 +23,7 @@
             </div>
             
             <div class="auth-options">
-                <div class="auth-card" onclick="vault.showLoginOptions()">
+                <div class="auth-card" onclick="vault.checkExistingVault()">
                     <div class="auth-icon">🔑</div>
                     <h3>Login</h3>
                     <p>Access your existing vault</p>
@@ -42,33 +42,6 @@
                 <div class="feature">💾 Works Offline</div>
                 <div class="feature">🌐 Access Anywhere</div>
             </div>
-        </div>
-        
-        <!-- Login Options Screen -->
-        <div id="loginOptionsScreen" class="screen hidden">
-            <h2>🔑 Login to Your Vault</h2>
-            <p class="welcome-text">Choose how to access your vault</p>
-            
-            <div class="login-methods">
-                <button class="method-btn" onclick="vault.checkExistingVault()">
-                    <span class="method-icon">🏠</span>
-                    <span class="method-text">
-                        <strong>Continue with This Device</strong>
-                        <small>Access vault saved on this browser</small>
-                    </span>
-                </button>
-                
-                <button class="method-btn" onclick="document.getElementById('importFileLogin').click()">
-                    <span class="method-icon">📁</span>
-                    <span class="method-text">
-                        <strong>Import Vault File</strong>
-                        <small>Load vault from another device</small>
-                    </span>
-                </button>
-                <input type="file" id="importFileLogin" accept=".vault,.json" style="display:none">
-            </div>
-            
-            <button class="back-btn" onclick="vault.showWelcomeScreen()">← Back to Home</button>
         </div>
         
         <!-- Setup Screen -->

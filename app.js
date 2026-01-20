@@ -106,11 +106,6 @@ const vault = {
         document.getElementById('welcomeScreen').classList.remove('hidden');
     },
 
-    showLoginOptions() {
-        this.hideAllScreens();
-        document.getElementById('loginOptionsScreen').classList.remove('hidden');
-    },
-
     checkExistingVault() {
         if (storage.exists('vaultConfig')) {
             this.showVerifyScreen();
@@ -441,13 +436,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Import file handler (setup screen)
     document.getElementById('importFile').addEventListener('change', (e) => {
-        if (e.target.files[0]) {
-            vault.importVault(e.target.files[0]);
-        }
-    });
-    
-    // Import file handler (login screen)
-    document.getElementById('importFileLogin').addEventListener('change', (e) => {
         if (e.target.files[0]) {
             vault.importVault(e.target.files[0]);
         }
